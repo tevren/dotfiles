@@ -1,0 +1,58 @@
+# Install native apps
+brew tap phinze/homebrew-cask
+brew install brew-cask
+
+function installcask() {
+    brew cask install "${@}" 2> /dev/null
+}
+
+installcask cord
+installcask gimp
+installcask adium 
+installcask alfred 
+installcask android-studio
+installcask calibre 
+installcask candybar
+installcask cyberduck 
+installcask dash 
+installcask dropbox 
+installcask firefox 
+installcask flash 
+installcask genymotion
+installcask google-chrome 
+installcask google-hangouts
+installcask handbrake
+installcask hip-chat 
+installcask istat-menus 
+installcask iterm2 
+installcask java 
+installcask keyremap4macbook
+installcask kindle 
+installcask kismac
+installcask knock 
+installcask little-snitch
+installcask macpass
+installcask mou
+installcask mysql-workbench
+installcask onyx 
+installcask openoffice 
+installcask opera-next 
+installcask pckeyboardhack
+installcask plex 
+installcask rubymine 
+installcask screenhero 
+installcask shoes
+installcask skitch
+installcask skype 
+installcask slate 
+installcask spotify 
+installcask steam 
+installcask the-unarchiver 
+installcask transmission 
+installcask vagrant 
+installcask virtualbox 
+installcask vlc 
+installcask xquartz 
+
+brew tap caskroom/versions
+installcask sublime-text3
