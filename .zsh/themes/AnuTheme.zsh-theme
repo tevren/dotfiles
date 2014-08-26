@@ -1,4 +1,4 @@
-PROMPT='%{$fg[blue]%}%n%{$reset_color%} on %{$fg[red]%}%M%{$reset_color%} in %{$fg[blue]%}%~%b%{$reset_color%}$(git_time_since_commit)$(check_git_prompt_info)%{$reset_color%})
+PROMPT='%{$fg[blue]%}%n%{$reset_color%} on %{$fg[red]%}%M%{$reset_color%} in %{$fg[blue]%}%~$(git_time_since_commit)%{$reset_color%}$(check_git_prompt_info)
 $ '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}"
@@ -23,9 +23,9 @@ ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
 function check_git_prompt_info() {
     if git rev-parse --git-dir > /dev/null 2>&1; then
         if [[ -z $(git_prompt_info) ]]; then
-            echo "%{$fg[magenta]%}detached-head%{$reset_color%}"
+            echo "%{$reset_color%}[%{$fg[magenta]%}detached-head%{$reset_color%}]"
         else
-            echo "${$(git_prompt_info)/)/}"
+            echo "%{$reset_color%}[${$(git_prompt_info)/)/}%{$reset_color%}]"
         fi
     fi
 }
@@ -34,7 +34,7 @@ function check_git_prompt_info() {
 function gemset() {
     if [[ -f .ruby-gemset ]]; then
         GEMSET=`cat .ruby-gemset`
-        echo "%{$reset_color%}|%{$fg[yellow]%}$GEMSET%{$reset_color%}|"
+        echo "%{$reset_color%}[%{$fg[yellow]%}$GEMSET%{$reset_color%}]"
     fi
 }
 
@@ -42,7 +42,7 @@ function gemset() {
 function  ruby_version() {
     if [[ -f .ruby-version ]]; then
         RUBYVERSION=`cat .ruby-version`
-        echo "%{$fg[yellow]%}$RUBYVERSION"
+        echo "%{$reset_color%}[%{$fg[yellow]%}$RUBYVERSION%{$reset_color%}]"
     fi
 }
 
@@ -50,5 +50,5 @@ function  ruby_version() {
 # use a neutral color, otherwise colors will vary according to time.
 function git_time_since_commit() {
     COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
-    echo "($(ruby_version)$(gemset)"
+    echo "$(ruby_version)$(gemset)"
 }
