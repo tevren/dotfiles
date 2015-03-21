@@ -202,6 +202,15 @@ function sshid () {
         \ssh "$ip" "$@"
 }
 
+function wshark(){
+  if (( $# != 2 )); then
+    echo "USAGE: wshark HOST PORT" >&2
+    return 1
+  fi
+  local whost="$1"
+  local wport="$2"
+  wireshark -k -i <(ssh $whost "sudo tcpdump -i any -s 0 -U -n -w - port $wport")
+}
 # https://gist.github.com/thalweg/c5c127f97548512ba14b
 # Chef conveniences
 function cdbag(){

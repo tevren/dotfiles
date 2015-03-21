@@ -1,7 +1,6 @@
+. `brew --prefix`/etc/profile.d/z.sh
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-ZSH_CUSTOM=$HOME/.zsh
-ZSH_THEME="AnuTheme"
 MANPATH="/usr/local/man:$MANPATH"
 # Uncomment this to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
@@ -9,6 +8,8 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want to disable command autocorrection
 DISABLE_CORRECTION="true"
+# ZSH_CUSTOM=$HOME/.zsh
+# ZSH_THEME="AnuTheme"
 
 
 
@@ -18,10 +19,53 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew brew-cask bundler common-aliases gem git git-flow git-extras jira knife osx vagrant ruby rails tmux_pane_words zsh-syntax-highlighting curl zsh-completions)
-        
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh/site-functions/_aws
+source "${HOME}/zgen/zgen.zsh"
+
+# check if there's no init script
+if ! zgen saved; then
+    echo "Creating a zgen save"
+
+    zgen oh-my-zsh
+
+    # plugins
+    zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/adb
+    zgen oh-my-zsh plugins/brew
+    zgen oh-my-zsh plugins/brew-cask
+    zgen oh-my-zsh plugins/bundler
+    zgen oh-my-zsh plugins/common-aliases
+    zgen oh-my-zsh plugins/compleat
+    zgen oh-my-zsh plugins/gem
+    zgen oh-my-zsh plugins/git-extras
+    zgen oh-my-zsh plugins/git-flow
+    zgen oh-my-zsh plugins/jira
+    zgen oh-my-zsh plugins/knife
+    zgen oh-my-zsh plugins/osx
+    zgen oh-my-zsh plugins/rails # commenting it out until i figure out whats wrong
+    zgen oh-my-zsh plugins/ruby
+    zgen oh-my-zsh plugins/rvm
+    zgen oh-my-zsh plugins/vagrant
+    zgen load berkshelf/berkshelf-zsh-plugin
+    zgen load gepoch/oh-my-zsh-dirstack
+    zgen load robertzk/hipchat.zsh
+    zgen load skx/sysadmin-util
+    zgen load tevren/git-zsh-plugin
+    zgen load tevren/gitfast-zsh-plugin
+    zgen load tevren/tmux_pane_words
+    zgen load Valodim/zsh-curl-completion
+    zgen load zsh-users/zsh-completions
+    zgen load zsh-users/zsh-syntax-highlighting
+
+    # theme
+    zgen load tevren/AnuTheme AnuTheme
+
+    # save all to init script
+    zgen save
+fi
+zgen init
+
 
 #******************************
 #* Settings

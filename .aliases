@@ -7,6 +7,7 @@ alias g="git"
 alias h="history"
 alias j="jobs"
 alias e="subl"
+alias mou="open -a Mou"
 
 # ZSH aliases
 alias zshconfig="$EDITOR ~/.zshrc"
@@ -147,8 +148,6 @@ alias v='vagrant'
 alias vr='vagrant reload'
 alias vssh='vagrant ssh'
 alias rvbox='sudo /Library/StartupItems/VirtualBox/VirtualBox restart'
-
-# dsocks and ruby related
 alias dbe='dsocks.sh bundle exec'
 alias b='bundle'
 alias bi='bundle install'
