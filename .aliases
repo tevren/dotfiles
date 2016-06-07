@@ -8,7 +8,6 @@ alias h="history"
 alias j="jobs"
 alias e="subl"
 alias mou="open -a Mou"
-
 # ZSH aliases
 alias zshconfig="$EDITOR ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
@@ -153,6 +152,4 @@ alias b='bundle'
 alias bi='bundle install'
 alias bil='bi --local'
 alias be='bundle exec'
-alias dk='dsocks.sh bundle exec kitchen'
-
 
