@@ -1,4 +1,4 @@
-. `brew --prefix`/etc/profile.d/z.sh
+. $HOME/z.sh
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 MANPATH="/usr/local/man:$MANPATH"
