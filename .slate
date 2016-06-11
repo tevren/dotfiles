@@ -68,8 +68,6 @@ bind down:${hyper} 	resize +0 +10%
 # hyper window switching
 bind c:${hyper} focus 'Google Chrome'
 bind s:${hyper} focus 'Sublime Text'
-bind a:${hyper} focus 'Adium'
-bind z:${hyper} focus 'HipChat'
 
 # ======================================
 # SUPER BINDS
