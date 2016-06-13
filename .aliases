@@ -153,3 +153,6 @@ alias bi='bundle install'
 alias bil='bi --local'
 alias be='bundle exec'
 
+
+# MIT scheme with editor
+alias edwin=scheme --edit -edwin
