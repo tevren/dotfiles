@@ -57,6 +57,7 @@ if ! zgen saved; then
     zgen load Valodim/zsh-curl-completion
     zgen load zsh-users/zsh-completions
     zgen load zsh-users/zsh-syntax-highlighting
+    zgen load littleq0903/gcloud-zsh-completion
 
     # theme
     zgen load tevren/AnuTheme AnuTheme
