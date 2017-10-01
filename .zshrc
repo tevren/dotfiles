@@ -7,7 +7,6 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want to disable command autocorrection
 DISABLE_CORRECTION="true"
 ZSH_CUSTOM=$HOME/.zsh
-ZSH_THEME="AnuTheme"
 
 #=============================
 # User configuration
@@ -16,7 +15,6 @@ ZSH_THEME="AnuTheme"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 source "${HOME}/.zgen/zgen.zsh"
-source /usr/local/bin/aws_zsh_completer.sh
 source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 # check if there's no init script
