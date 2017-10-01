@@ -156,3 +156,9 @@ alias be='bundle exec'
 
 # MIT scheme with editor
 alias edwin=scheme --edit -edwin
+
+# Kubernetes related
+alias watch='watch '
+alias kc='kubectl'
+alias kx='kubectx'
+

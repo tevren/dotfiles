@@ -25,5 +25,5 @@ export EDITOR="reattach-to-user-namespace subl --wait"
 #export RBENV_ROOT=/usr/local/var/rbenv
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-
-export PATH="/usr/local/share/npm/bin:/usr/local/share/python:/usr/local/bin:$HOME/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export GOPATH="$HOME/go"
+export PATH="$HOME/go/bin:$HOME/.bin:$HOME/.pyenv/shims:/usr/local/share/npm/bin:/usr/local/share/python:/usr/local/bin:$HOME/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
