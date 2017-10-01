@@ -218,3 +218,9 @@ function vact(){
 		fi
 	fi
 }
+
+function gssh(){
+	host=$1
+	zone=$(gcloud compute instances list --filter="name ~ $host" --format json | jq '.[0].zone' | cut -d '/' -f 9 | head -c-2)
+	gcloud compute ssh $host --zone=$zone
+}
