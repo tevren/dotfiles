@@ -152,4 +152,5 @@ zstyle ':completion:*:(rm|kill|diff):*' ignore-line yes
 users=($USER root)
 zstyle ':completion:*' users $users
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

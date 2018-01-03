@@ -162,3 +162,9 @@ alias watch='watch '
 alias kc='kubectl'
 alias kx='kubectx'
 
+#python related
+alias lsvirtualenv='pyenv virtualenvs'
+alias workon='pyenv activate '
+alias deact='pyenv deactivate '
+alias rmvirtualenv='pyenv virtualenv-delete '
+alias mkvirutalenv='pyenv virtualenv '
