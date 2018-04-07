@@ -224,3 +224,10 @@ function gssh(){
 	zone=$(gcloud compute instances list --filter="name ~ $host" --format json | jq '.[0].zone' | cut -d '/' -f 9 | head -c-2)
 	gcloud compute ssh $host --zone=$zone
 }
+
+function ap {
+  ATOM_TEMP=$(mktemp /tmp/atom.XXXX)
+  cat > $ATOM_TEMP
+  atom --wait $ATOM_TEMP
+  rm $ATOM_TEMP
+}
