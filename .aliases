@@ -6,7 +6,7 @@ alias p="cd ~/Projects"
 alias g="git"
 alias h="history"
 alias j="jobs"
-alias e="subl"
+alias e="code"
 alias mou="open -a Mou"
 # ZSH aliases
 alias zshconfig="$EDITOR ~/.zshrc"
