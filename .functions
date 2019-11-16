@@ -195,7 +195,6 @@ function o() {
 	fi
 }
 
-
 function wshark(){
   if (( $# != 2 )); then
     echo "USAGE: wshark HOST PORT" >&2
@@ -220,7 +219,70 @@ function vact(){
 }
 
 function gssh(){
-	host=$1
-	zone=$(gcloud compute instances list --filter="name ~ $host" --format json | jq '.[0].zone' | cut -d '/' -f 9 | head -c-2)
-	gcloud compute ssh $host --zone=$zone
+	if [ -e $(which jq) ]; then
+		host=$1
+	  zone=$(gcloud compute instances list --filter="name ~ $host" --format json | jq -r '.[0].zone | split("/") | .[-1]')
+    additional_flags="${@:2}"
+		gcloud compute ssh $host --zone=$zone $additional_flags
+	else
+		echo "gssh requires jq, please install jq before proceeding"
+	fi
+}
+
+function ap(){
+  ATOM_TEMP=$(mktemp /tmp/atom.XXXX)
+  cat > $ATOM_TEMP
+  atom --wait $ATOM_TEMP
+  rm --interactive=never $ATOM_TEMP
+}
+
+function kcwshark(){
+  if (( $# != 2 )); then
+    echo "USAGE: kcwshark POD PORT" >&2
+    return 1
+  fi
+  local whost="$1"
+  local wport="$2"
+  wireshark -k -i <(kubectl exec -it $whost -- /bin/bash -c "tcpdump port $wport")
+}
+
+function diffmaster(){
+  deploy="$1"
+  git diff $(kc get deploy ${deploy} -o json | jq -r '.spec.template.spec.containers[0].image' | cut -f 2 -d ':')..master
+}
+
+function proxy_kube_pod(){
+  if (( $# != 3 )); then
+    echo "USAGE: proxy_kube_pod POD LOCAL_PORT REMOTE_PORT" >&2
+    return 1
+  fi
+  local pod="$1"
+  local localport="$2"
+  local remoteport="$3"
+  kubectl port-forward $(kubectl get pod -l run=$pod --output json | jq -r '.items[0].metadata.name') $localport:$remoteport
+}
+
+function dump_current_cluster() {
+    current_ctx=$(kubectl config current-context)
+    ctx_cluster=$(echo ${current_ctx} | cut -d '_' -f 4)
+    for ns in $(kubectl get ns --no-headers | cut -d " " -f1); do
+      if { [ "$ns" != "kube-system" ]; }; then
+      kubectl --namespace="${ns}" get --export -o=json svc,deployments,secrets,ds,ing | \
+    jq '.items[] |
+  select(.type!="kubernetes.io/service-account-token") | select(.metadata.name!="kubernetes") |
+  del(
+      .spec.clusterIP,
+      .metadata.uid,
+      .metadata.selfLink,
+      .metadata.resourceVersion,
+      .metadata.creationTimestamp,
+      .metadata.generation,
+      .status,
+      .spec.template.spec.securityContext,
+      .spec.template.spec.dnsPolicy,
+      .spec.template.spec.terminationGracePeriodSeconds,
+      .spec.template.spec.restartPolicy
+  )' >> "./$ctx_cluster.json"
+      fi
+    done
 }

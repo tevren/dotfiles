@@ -1,5 +1,4 @@
-# . $HOME/z.sh
-MANPATH="/usr/local/man:$MANPATH"
+  MANPATH="/usr/local/man:$MANPATH"
 # Uncomment this to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
 # Uncomment following line if you want to disable autosetting terminal title.
@@ -15,8 +14,7 @@ ZSH_CUSTOM=$HOME/.zsh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 source "${HOME}/.zgen/zgen.zsh"
-source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+
 # check if there's no init script
 if ! zgen saved; then
     echo "Creating a zgen save"
@@ -26,23 +24,14 @@ if ! zgen saved; then
     # plugins
     zgen oh-my-zsh plugins/git
     zgen oh-my-zsh plugins/brew
-    zgen oh-my-zsh plugins/bundler
-    zgen oh-my-zsh plugins/common-aliases
-    zgen oh-my-zsh plugins/gem
+    zgen oh-my-zsh plugins/docker
+    zgen oh-my-zsh plugins/docker-compose
     zgen oh-my-zsh plugins/golang
-    zgen oh-my-zsh plugins/httpie
     zgen oh-my-zsh plugins/kubectl
-    zgen oh-my-zsh plugins/ruby
-    zgen oh-my-zsh plugins/vagrant
     zgen oh-my-zsh plugins/z
-    zgen load skx/sysadmin-util
-    zgen load tevren/git-zsh-plugin
-    zgen load tevren/gitfast-zsh-plugin
-    zgen load tevren/tmux_pane_words
-    zgen load Valodim/zsh-curl-completion
     zgen load zsh-users/zsh-syntax-highlighting
     # theme
-    zgen load tevren/AnuTheme AnuTheme
+    zgen load Sikian/bullet-train.zsh bullet-train
 
     # save all to init script
     zgen save
@@ -88,32 +77,20 @@ unsetopt correct_all
 unsetopt list_ambiguous
 unset MAILCHECK # Don't check for new mail
 
-for file in ~/.{path,exports,aliases,functions,extra}; do
+for file in ~/.{exports,aliases,functions,extra}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
 
 #=============================
-# zsh-autosuggestions
-#=============================
-if [ -f ~/.zsh-autosuggestions/autosuggestions.zsh ]; then
-    source ~/.zsh-autosuggestions/autosuggestions.zsh
-    # Enable autosuggestions automatically
-    zle-line-init() {
-        zle autosuggest-start
-    }
-    zle -N zle-line-init
-    bindkey '^t' autosuggest-toggle
-    bindkey '^F' vi-forward-blank-word
-    bindkey '^f' vi-forward-word
-fi
-
-autoload -Uz compinit && compinit
-autoload -Uz colors && colors
-
-#=============================
 # compeletions
 #=============================
+fpath=(/usr/local/Cellar/kubectx/0.3.1/share/zsh/site-functions/_kubectx $fpath)
+autoload -Uz compinit compdef && compinit
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz colors && colors
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 # Gray out already typed characters of completions
 zstyle -e ':completion:*:default' list-colors \
   'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==90=0}:${(s.:.)LS_COLORS}")'
@@ -151,6 +128,3 @@ zstyle ':completion:*:(rm|kill|diff):*' ignore-line yes
 # Less users
 users=($USER root)
 zstyle ':completion:*' users $users
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
