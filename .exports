@@ -25,15 +25,14 @@ export EDITOR="reattach-to-user-namespace code --wait"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export GOPATH="$HOME/Projects/go"
 export PATH="$HOME/Projects/go/bin:$HOME/.bin:$HOME/.goenv/shims:$HOME/.pyenv/shims:/usr/local/share/npm/bin:/usr/local/bin:$HOME/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export BULLETTRAIN_PROMPT_ORDER=(
 	dir
 	gcp
+	aws
 	kctx
 	go
 	git
 )	
 export BULLETTRAIN_DIR_EXTENDED=2
 export BULLETTRAIN_KCTX_KCONFIG=$HOME/.kube/config
+export BULLETTRAIN_AWS_BG=magenta
